@@ -308,10 +308,13 @@ class Store {
         const progressHandler = (address, hash, entry, progress, have) => {
           if (progress === have) {
             this.events.off('replicate.progress', progressHandler)
-            console.log(this.events.listeners('replicate.progress').length)
+
+            const l0 = this.events.listeners('replicate.progress')
+            console.log(l0.length, 'replicate.progress listeners', l0.map(x => x.toString()))
     
             this.events.once('replicated', () => {
-              console.log(this.events.listeners('replicated').length)
+              const l1 = this.events.listeners('replicated')
+              console.log(l1.length, 'replicated listeners', l1.map(x => x.toString()))
               resolve()
             })
           }
